@@ -7,7 +7,7 @@ export interface ApiResponse<T> {
 }
 
 export interface Setting {
-    id?: number
+    id?: string
     appKey: string
     appSecret: string
     webHookUrl: string
