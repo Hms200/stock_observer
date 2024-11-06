@@ -1,8 +1,8 @@
-import Input from '../../components/common/form/Input.tsx'
-import Button from '../../components/common/Button.tsx'
+import Input from '../components/common/form/Input.tsx'
+import Button from '../components/common/Button.tsx'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { ApiResponse, apiUrl, Setting } from '../../config/ApiConfig.ts'
+import { ApiResponse, apiUrl, Setting } from '../config/ApiConfig.ts'
 import { useNavigate } from 'react-router-dom'
 
 type KeyValues = {

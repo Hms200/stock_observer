@@ -1,9 +1,9 @@
 import './App.css'
 import './output.css'
-import KeySetting from './pages/main/KeySetting.tsx'
-import MainLayout from './pages/main/MainLayout.tsx'
+import KeySetting from './pages/KeySetting.tsx'
+import MainLayout from './pages/MainLayout.tsx'
 import { Route, Routes } from 'react-router-dom'
-import MainPage from './pages/main/MainPage.tsx'
+import MainPage from './pages/MainPage.tsx'
 
 function App() {
     return (
