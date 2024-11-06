@@ -9,7 +9,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     border?: boolean
     borderColor?: Color
     size?: Size
-    onClick?: () => null
+    onClick?: () => void
     color?: Color
     textColor?: Color
     disabled?: boolean
@@ -41,16 +41,16 @@ const Button = ({
     const classNames = clsx(
         `flex items-center justify-center cursor-pointer py-2 px-5`,
         `${buttonColorConfig[color]}`,
-        `text-base ${textColorConfig[textColor]}`,
+        `text-xl ${textColorConfig[textColor]}`,
         {
             rounded: rounded,
             border: border,
         },
         typeof borderColor === 'string' && border && `${borderColorConfig[borderColor]}`,
         size === 'sm' && 'w-12',
-        size === 'md' && 'w-16',
-        size === 'lg' && 'w-20 h-12',
-        size === 'xlg' && 'w-24 h-14',
+        size === 'md' && 'w-24',
+        size === 'lg' && 'w-30 h-12',
+        size === 'xlg' && 'w-36 h-14',
         className && className,
     )
     return (

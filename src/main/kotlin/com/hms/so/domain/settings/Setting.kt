@@ -1,10 +1,6 @@
-package com.hms.so.settings
+package com.hms.so.domain.settings
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 class Setting(
@@ -20,6 +16,9 @@ class Setting(
 
     @Column
     var webHookUrl: String,
+
+    @Column
+    var accessToken: String? = null,
 )
 
 fun Setting.toDto(): SettingDto {
@@ -27,6 +26,7 @@ fun Setting.toDto(): SettingDto {
         id = this.id,
         appKey = this.appKey,
         appSecret = this.appSecret,
-        webHookUrl = this.webHookUrl
+        webHookUrl = this.webHookUrl,
+        accessToken = this.accessToken,
     )
 }

@@ -1,8 +1,8 @@
 package com.hms.so.setting
 
-import com.hms.so.settings.Setting
-import com.hms.so.settings.SettingRepository
-import com.hms.so.settings.toDto
+import com.hms.so.domain.settings.Setting
+import com.hms.so.domain.settings.SettingRepository
+import com.hms.so.domain.settings.toDto
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
