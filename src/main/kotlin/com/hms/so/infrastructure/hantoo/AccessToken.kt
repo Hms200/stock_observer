@@ -1,7 +1,6 @@
 package com.hms.so.infrastructure.hantoo
 
 import com.hms.so.domain.settings.SettingDto
-import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -21,21 +20,16 @@ data class AccessTokenResponse(
 )
 
 @Service
-class AccessTokenService() {
-
-    val client = WebClient.builder()
-        .baseUrl(VIRTUAL_DOMAIN)
-        .defaultHeaders {
-            it.contentType = MediaType.APPLICATION_JSON_UTF8
-        }
-        .build()
+class AccessTokenService(
+    private val webClient: WebClient
+) {
 
     fun getAccessToken(settingDto: SettingDto): AccessTokenResponse? {
         val body = AccessTokenRequest(
             appkey = settingDto.appKey,
             appsecret = settingDto.appSecret
         )
-        return client
+        return webClient
             .post()
             .uri(ACCESS_TOKEN_REQUEST_RUI)
             .bodyValue(body)

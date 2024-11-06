@@ -5,7 +5,7 @@ import jakarta.persistence.*
 @Entity
 class Setting(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     val id: Long? = null,
 
     @Column

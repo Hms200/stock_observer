@@ -1,6 +1,7 @@
 package com.hms.so.domain.settings
 
 import com.hms.so.infrastructure.hantoo.AccessTokenService
+import com.hms.so.infrastructure.hantoo.RequestHeader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -8,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class SettingService(
     private val repository: SettingRepository,
-    private val accessTokenService: AccessTokenService
+    private val accessTokenService: AccessTokenService,
+    private val requestHeader: RequestHeader,
 ) {
 
     fun getSettings(): SettingDto? {
@@ -55,7 +57,8 @@ class SettingService(
         if (response?.access_token.isNullOrBlank()) {
             throw IllegalArgumentException("appkey appsecret 확인")
         }
-        return repository.save(
+
+        val result = repository.save(
             Setting(
                 id = settingDto.id,
                 appKey = settingDto.appKey,
@@ -65,6 +68,9 @@ class SettingService(
             )
         ).toDto()
 
+        requestHeader.setAuthorizations(result)
+
+        return result
     }
 
     fun delete() {

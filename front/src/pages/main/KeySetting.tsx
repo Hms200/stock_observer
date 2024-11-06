@@ -6,11 +6,13 @@ import { ApiResponse, apiUrl, Setting } from '../../config/ApiConfig.ts'
 import { useNavigate } from 'react-router-dom'
 
 type KeyValues = {
+    id?: string
     appKey?: string
     appSecret?: string
     webHookUrl?: string
 }
 const keyValuesInitialValue: KeyValues = {
+    id: null,
     appKey: '',
     appSecret: '',
     webHookUrl: '',
@@ -78,6 +80,7 @@ const KeySetting = () => {
     useEffect(() => {
         if (data?.success) {
             setKeyValues({
+                id: data.body?.id,
                 appKey: data.body?.appKey,
                 appSecret: data.body?.appSecret,
                 webHookUrl: data.body?.webHookUrl,
