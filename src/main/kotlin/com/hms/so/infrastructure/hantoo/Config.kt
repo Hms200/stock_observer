@@ -23,7 +23,7 @@ class RequestHeader {
         this.appsecret = values.appSecret
     }
 
-    fun getHeaders(): HashMap<String, String> {
+    fun getHeaders(): Map<String, String> {
         return hashMapOf(
             "authorization" to "Bearer " + this.authorization,
             "appkey" to this.appkey,

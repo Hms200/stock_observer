@@ -2,13 +2,6 @@ export type Size = 'sm' | 'md' | 'lg' | 'xlg'
 
 export type Color = 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'black' | 'white'
 
-export const sizeConfig = {
-    sm: 'w-12',
-    md: 'w-16',
-    lg: 'w-20',
-    xlg: 'w-24',
-}
-
 export const textColorConfig = {
     black: 'text-black',
     white: 'text-white',

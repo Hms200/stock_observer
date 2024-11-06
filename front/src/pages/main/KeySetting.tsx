@@ -12,7 +12,7 @@ type KeyValues = {
     webHookUrl?: string
 }
 const keyValuesInitialValue: KeyValues = {
-    id: null,
+    id: undefined,
     appKey: '',
     appSecret: '',
     webHookUrl: '',
