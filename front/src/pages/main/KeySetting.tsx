@@ -54,9 +54,6 @@ const KeySetting = () => {
                 alert(data.errorMessage)
                 throw new Error()
             }
-            localStorage.setItem('appKey', data.body ? data.body.appKey : '')
-            localStorage.setItem('appSecret', data.body ? data.body.appSecret : '')
-            localStorage.setItem('accessToken', data.body?.accessToken ? data.body.accessToken : '')
         },
     })
 
