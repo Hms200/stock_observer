@@ -1,12 +1,22 @@
-import { SearchResult } from '../../config/ApiConfig.ts'
+import { SearchResultOutput, StockApiResponse } from '../../config/ApiConfig.ts'
 import clsx from 'clsx'
+import Button from '../common/Button.tsx'
 
 interface SearchResultProps {
-    data?: SearchResult
+    data?: StockApiResponse<SearchResultOutput>
     visible: boolean
+    onClick: () => void
+    onCancelClick: () => void
+    isConnected: boolean
 }
 
-const SearchResultBox = ({ data, visible = false }: SearchResultProps) => {
+const SearchResultBox = ({
+    data,
+    visible = false,
+    onClick,
+    onCancelClick,
+    isConnected,
+}: SearchResultProps) => {
     return (
         <div className={`${clsx(`w-3/4 border my-5 text-black p-5`, visible ? 'flex flex-col' : 'hidden')}`}>
             <span className={'font-bold text-2xl'}>
@@ -19,6 +29,16 @@ const SearchResultBox = ({ data, visible = false }: SearchResultProps) => {
             <div className={'w-full flex flex-row justify-end pe-5'}>
                 <span className={'mx-10'}>전일 종가: {data?.output?.bfdy_clpr}</span>
                 <span>당일 종가: {data?.output?.thdt_clpr}</span>
+            </div>
+            <div className={'w-full flex justify-start'}>
+                <Button value={'감시'} textColor={'white'} onClick={onClick} disabled={!isConnected} />
+                <Button
+                    value={'중지'}
+                    textColor={'white'}
+                    color={'secondary'}
+                    onClick={onCancelClick}
+                    disabled={!isConnected}
+                />
             </div>
         </div>
     )

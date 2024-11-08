@@ -9,6 +9,12 @@ import org.springframework.web.reactive.function.client.WebClient
 const val REAL_DOMAIN = "https://openapi.koreainvestment.com:9443"
 const val VIRTUAL_DOMAIN = "https://openapivts.koreainvestment.com:29443"
 
+data class StockApiResponse<T>(
+    val rt_cd: String,
+    val msg_cd: String,
+    val output: T,
+)
+
 @Component
 class RequestHeader {
     var authorization: String = ""

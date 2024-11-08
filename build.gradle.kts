@@ -33,6 +33,8 @@ dependencies {
     implementation("org.springframework.session:spring-session-core")
     runtimeOnly("org.xerial:sqlite-jdbc:3.46.1.3")
     implementation("org.hibernate.orm:hibernate-community-dialects")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
