@@ -24,3 +24,5 @@ class SlackApi() {
             .block()
     }
 }
+
+fun textBold(text: String) = "*$text*"

@@ -51,6 +51,15 @@ export interface StockPriceOutput {
     stck_llam: string
 }
 
+export interface StockAskingPriceOutput {
+    // 총 매도호가 잔량
+    total_askp_rsqn: string
+    // 총 매수호가 잔량
+    total_bidp_rsqn: string
+    // 순매수 호가 잔량
+    ntby_aspr_rsqn: string
+}
+
 export const stockPriceOutputInitialValue: StockPriceOutput = {
     stck_hgpr: '',
     prdy_ctrt: '',
@@ -58,9 +67,15 @@ export const stockPriceOutputInitialValue: StockPriceOutput = {
     prdy_vrss_sign: '',
     stck_llam: '',
     stck_lwpr: '',
-    stck_mspr: '',
+    stck_mxpr: '',
     stck_oprc: '',
     stck_prpr: '',
+}
+
+export const stockAskingPriceOutputInitialValue: StockAskingPriceOutput = {
+    total_askp_rsqn: '',
+    total_bidp_rsqn: '',
+    ntby_aspr_rsqn: '',
 }
 
 export const validateCode = (code: string): boolean => {

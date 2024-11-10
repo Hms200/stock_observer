@@ -2,7 +2,7 @@ package com.hms.so.domain.stock
 
 import com.hms.so.common.ResponseObject
 import com.hms.so.common.logger
-import com.hms.so.configuration.MessageCommand
+import com.hms.so.configuration.MessageCommand.*
 import com.hms.so.configuration.StompMessage
 import com.hms.so.infrastructure.hantoo.*
 import kotlinx.coroutines.runBlocking
@@ -41,13 +41,20 @@ class StockController(
     @MessageMapping("price")
     fun getPriceMessage(message: StompMessage<String>) {
         log.info("getPriceMessage invoked with parameter message:$message")
-        if (message.command == MessageCommand.START_GET_PRICE) {
-            runBlocking {
+        when (message.command) {
+            START_GET_PRICE -> runBlocking {
                 stockService.getStockPriceInfo(code = message.code)
             }
-        } else if (message.command == MessageCommand.STOP_GET_PRICE) {
-            stockService.stopGetPrice()
-        }
 
+            STOP_GET_PRICE -> stockService.stopGetPrice()
+
+            START_GET_ASK_PRICE -> runBlocking {
+                stockService.getStockAskingPriceInfo(code = message.code)
+            }
+
+            STOP_GET_ASK_PRICE -> stockService.stopGetAskingPrice()
+
+            null -> return
+        }
     }
 }

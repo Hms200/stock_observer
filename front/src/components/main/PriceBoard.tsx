@@ -6,7 +6,7 @@ interface PriceBoardProps {
 }
 
 const PriceBoard = ({ visible, priceData }: PriceBoardProps) => {
-    const isPositive: boolean = priceData.prdy_vrss_sign === '2'
+    const isPositive: boolean = priceData.prdy_vrss_sign === '2' || priceData.prdy_vrss_sign === '1'
     const priceGap = Number(priceData.stck_oprc) - Number(priceData.stck_hgpr)
     return (
         <div className={`w-1/4 border text-black items-start ${visible ? 'flex flex-col' : 'hidden'}`}>

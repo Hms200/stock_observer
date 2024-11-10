@@ -6,20 +6,27 @@ import {
     apiUrl,
     SearchResultOutput,
     StockApiResponse,
+    StockAskingPriceOutput,
+    stockAskingPriceOutputInitialValue,
     StockPriceOutput,
     stockPriceOutputInitialValue,
     validateCode,
 } from '../config/ApiConfig.ts'
 import SearchResultBox from '../components/main/SearchResultBox.tsx'
 import PriceBoard from '../components/main/PriceBoard.tsx'
-import stompClient, { StompMessage } from '../config/StompConfig.ts'
+import stompClient, { StompMessage, subscribePriceInfo, unsubscribePriceInfo } from '../config/StompConfig.ts'
+import AskingPriceBoard from '../components/main/AskingPriceBoard.tsx'
 
 const MainPage = () => {
     const [code, setCode] = useState<string>('')
     const [doSearch, setDoSearch] = useState<boolean>(false)
     const [priceBoardVisible, setPriceBoardVisible] = useState<boolean>(false)
+    const [askingPriceBoardVisible, setAskingPriceBoardVisible] = useState<boolean>(false)
     const [isStompConnected, setIsStompConnected] = useState<boolean>(false)
     const [priceData, setPriceData] = useState<StockPriceOutput>(stockPriceOutputInitialValue)
+    const [askingPriceData, setAskingPriceData] = useState<StockAskingPriceOutput>(
+        stockAskingPriceOutputInitialValue,
+    )
 
     const { data, isSuccess } = useQuery({
         queryKey: ['search', code],
@@ -58,15 +65,7 @@ const MainPage = () => {
 
     useEffect(() => {
         if (priceBoardVisible && isStompConnected) {
-            const message: StompMessage<string> = {
-                code: code,
-                command: 'START_GET_PRICE',
-            }
-            stompClient.publish({
-                destination: `/pub/price`,
-                body: JSON.stringify(message),
-            })
-            stompClient.subscribe(`/sub/price/${code}`, (message) => {
+            subscribePriceInfo(code, 'START_GET_PRICE', (message) => {
                 const body: StompMessage<StockApiResponse<StockPriceOutput>> = JSON.parse(
                     new TextDecoder('utf-8').decode(message.binaryBody),
                 )
@@ -75,18 +74,27 @@ const MainPage = () => {
             })
         } else {
             if (stompClient.connected) {
-                const message: StompMessage<string> = {
-                    code: code,
-                    command: 'STOP_GET_PRICE',
-                }
-                stompClient.publish({
-                    destination: `/pub/price`,
-                    body: JSON.stringify(message),
-                })
-                stompClient.unsubscribe(`/sub/price/${code}`)
+                unsubscribePriceInfo(code, 'STOP_GET_PRICE')
             }
         }
-    }, [priceBoardVisible, isStompConnected])
+    }, [code, priceBoardVisible, isStompConnected])
+
+    useEffect(() => {
+        if (askingPriceBoardVisible && isStompConnected) {
+            subscribePriceInfo(code, 'START_GET_ASK_PRICE', (message) => {
+                const body: StompMessage<StockApiResponse<StockAskingPriceOutput>> = JSON.parse(
+                    new TextDecoder('utf-8').decode(message.binaryBody),
+                )
+
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                body.data?.output && setAskingPriceData(body.data.output)
+            })
+        } else {
+            if (stompClient.connected) {
+                unsubscribePriceInfo(code, 'STOP_GET_ASK_PRICE')
+            }
+        }
+    }, [code, askingPriceBoardVisible, isStompConnected])
 
     return (
         <div className={'w-full h-full flex flex-col justify-start items-center border p-10'}>
@@ -108,11 +116,16 @@ const MainPage = () => {
                 data={data?.body}
                 visible={isSuccess}
                 onClick={() => setPriceBoardVisible(true)}
-                onCancelClick={() => setPriceBoardVisible(false)}
+                onAskingPriceButtonClick={() => setAskingPriceBoardVisible(true)}
+                onCancelClick={() => {
+                    setPriceBoardVisible(false)
+                    setAskingPriceBoardVisible(false)
+                }}
                 isConnected={isStompConnected}
             />
             <div className={'w-full flex justify-between'}>
                 <PriceBoard visible={priceBoardVisible && isStompConnected} priceData={priceData} />
+                <AskingPriceBoard visible={askingPriceBoardVisible} askingPriceData={askingPriceData} />
             </div>
         </div>
     )

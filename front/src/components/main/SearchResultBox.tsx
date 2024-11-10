@@ -6,6 +6,7 @@ interface SearchResultProps {
     data?: StockApiResponse<SearchResultOutput>
     visible: boolean
     onClick: () => void
+    onAskingPriceButtonClick: () => void
     onCancelClick: () => void
     isConnected: boolean
 }
@@ -14,6 +15,7 @@ const SearchResultBox = ({
     data,
     visible = false,
     onClick,
+    onAskingPriceButtonClick,
     onCancelClick,
     isConnected,
 }: SearchResultProps) => {
@@ -38,6 +40,13 @@ const SearchResultBox = ({
                     color={'secondary'}
                     onClick={onCancelClick}
                     disabled={!isConnected}
+                />
+                <Button
+                    value={'호가감시'}
+                    color={'success'}
+                    textColor={'white'}
+                    disabled={!isConnected}
+                    onClick={onAskingPriceButtonClick}
                 />
             </div>
         </div>
