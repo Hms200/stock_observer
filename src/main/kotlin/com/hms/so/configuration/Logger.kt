@@ -1,4 +1,4 @@
-package com.hms.so.common
+package com.hms.so.configuration
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

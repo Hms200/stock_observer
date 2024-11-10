@@ -1,6 +1,6 @@
 package com.hms.so.domain.settings
 
-import com.hms.so.common.ResponseObject
+import com.hms.so.configuration.ResponseObject
 import org.springframework.web.bind.annotation.*
 
 

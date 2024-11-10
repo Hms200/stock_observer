@@ -1,4 +1,4 @@
-package com.hms.so.common
+package com.hms.so.configuration
 
 data class ResponseObject<T>(
     val success: Boolean,
