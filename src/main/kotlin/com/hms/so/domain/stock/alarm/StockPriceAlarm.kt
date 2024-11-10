@@ -1,4 +1,4 @@
-package com.hms.so.domain.stock
+package com.hms.so.domain.stock.alarm
 
 import com.hms.so.infrastructure.hantoo.StockPriceResponseOutput
 import com.hms.so.infrastructure.slack.SlackApi

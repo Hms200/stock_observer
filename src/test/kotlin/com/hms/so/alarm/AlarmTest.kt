@@ -1,6 +1,6 @@
 package com.hms.so.alarm
 
-import com.hms.so.domain.stock.StockPriceAlarm
+import com.hms.so.domain.stock.alarm.StockPriceAlarm
 import com.hms.so.infrastructure.hantoo.StockPriceResponseOutput
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

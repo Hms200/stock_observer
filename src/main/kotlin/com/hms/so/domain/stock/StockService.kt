@@ -3,6 +3,8 @@ package com.hms.so.domain.stock
 import com.hms.so.configuration.MessageCommand
 import com.hms.so.configuration.StompMessage
 import com.hms.so.configuration.logger
+import com.hms.so.domain.stock.alarm.StockAskingPriceAlarm
+import com.hms.so.domain.stock.alarm.StockPriceAlarm
 import com.hms.so.infrastructure.hantoo.StockAskingPriceParams
 import com.hms.so.infrastructure.hantoo.StockAskingPriceService
 import com.hms.so.infrastructure.hantoo.StockPriceRequestParams
