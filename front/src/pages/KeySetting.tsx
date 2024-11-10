@@ -25,7 +25,7 @@ const KeySetting = () => {
     const [keyValues, setKeyValues] = useState<KeyValues>(keyValuesInitialValue)
 
     const { isLoading, isError, data } = useQuery({
-        queryKey: ['getSettings'],
+        queryKey: ['getSettings', keyValues],
         queryFn: async (): Promise<ApiResponse<Setting>> => {
             return await fetch(apiUrl + 'setting/get').then((response) => response.json())
         },
