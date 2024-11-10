@@ -1,11 +1,8 @@
 package com.hms.so.domain.settings
 
 import com.hms.so.common.ResponseObject
-import com.hms.so.common.logger
-import org.slf4j.Logger
 import org.springframework.web.bind.annotation.*
 
-const val name = "Setting Controller"
 
 @RestController
 @RequestMapping("setting")
@@ -13,19 +10,15 @@ const val name = "Setting Controller"
 class SettingController(
     private val service: SettingService
 ) {
-    val log: Logger = logger()
 
     @GetMapping("get")
     fun getSettings(): ResponseObject<SettingDto> {
-        log.info(name, "fun:getSettings:Called")
         return try {
-            log.info(name, "fun:getSettings:response:Success")
             ResponseObject(
                 success = true,
                 body = service.getSettings()
             )
         } catch (e: Error) {
-            log.error(name, "fun:getSettings:response:Failed:${e.message}")
             ResponseObject(
                 success = false,
                 errorMessage = e.message
