@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.Mono
 
-const val STOCK_ASKING_PRICE_URI = "https://openapi.koreainvestment.com:9443"
+const val STOCK_ASKING_PRICE_URI = "/uapi/domestic-stock/v1/quotations/inquire-asking-price-exp-ccn"
 const val STOCK_ASKING_PRICE_TR_ID = "FHKST01010200"
 
 data class StockAskingPriceParams(

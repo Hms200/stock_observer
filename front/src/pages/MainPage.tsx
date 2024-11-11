@@ -87,7 +87,7 @@ const MainPage = () => {
                 )
 
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                body.data?.output && setAskingPriceData(body.data.output)
+                body.data?.output1 && setAskingPriceData(body.data.output1)
             })
         } else {
             if (stompClient.connected) {

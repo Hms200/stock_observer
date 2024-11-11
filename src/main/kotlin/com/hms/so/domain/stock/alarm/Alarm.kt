@@ -6,7 +6,7 @@ import com.hms.so.infrastructure.slack.SlackWebHookBody
 interface Alarm<T, M> {
     val list: MutableList<T>
     fun push(outputData: T) {
-        if (list.size == 10) {
+        if (list.size <= 10) {
             list.add(outputData)
         } else {
             list.removeFirst()

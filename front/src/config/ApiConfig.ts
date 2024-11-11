@@ -17,7 +17,8 @@ export interface Setting {
 export interface StockApiResponse<T> {
     rt_cd: string
     msg_cd: string
-    output: T
+    output?: T
+    output1?: T
 }
 
 export interface SearchResultOutput {

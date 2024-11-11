@@ -1,1 +1,1 @@
-/// <reference config="vite/client" />
+// <reference config="vite/client" />

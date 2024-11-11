@@ -12,7 +12,8 @@ const val VIRTUAL_DOMAIN = "https://openapivts.koreainvestment.com:29443"
 data class StockApiResponse<T>(
     val rt_cd: String,
     val msg_cd: String,
-    val output: T,
+    val output: T? = null,
+    val output1: T? = null,
 )
 
 @Component

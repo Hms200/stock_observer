@@ -46,7 +46,7 @@ class StockService(
                         data = price
                     )
                 )
-                stockPriceAlarm.push(price!!.output)
+                price!!.output?.let { stockPriceAlarm.push(it) }
 
             } catch (e: Error) {
                 isGettingPrice = false
@@ -76,7 +76,7 @@ class StockService(
                         data = askingPrice
                     )
                 )
-                stockAskingPriceAlarm.push(askingPrice!!.output)
+                askingPrice!!.output1?.let { stockAskingPriceAlarm.push(it) }
 
             } catch (e: Error) {
                 isGettingAskingPrice = false

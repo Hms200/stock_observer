@@ -13,7 +13,7 @@ const PriceBoard = ({ visible, priceData }: PriceBoardProps) => {
             <div className={`flex justify-start gap-1 ${isPositive ? 'text-danger' : 'text-blue-700'}`}>
                 <span>현재가: {priceData.stck_prpr}</span>
                 <span>
-                    {isPositive ? '+' : '-'}
+                    {isPositive ? '+' : ''}
                     {priceData.prdy_vrss}
                 </span>
                 <span>{priceData.prdy_ctrt}%</span>

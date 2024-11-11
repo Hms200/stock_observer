@@ -53,13 +53,8 @@ class StockPriceAlarm(
 
     override fun createMessage(outputData: StockPriceResponseOutput, message: PriceMessage): SlackWebHookBody {
         val sign: String =
-            if (outputData.prdy_vrss_sign == "1" || outputData.prdy_vrss_sign == "2") {
-                "+"
-            } else if (outputData.prdy_vrss_sign == "3") {
-                ""
-            } else {
-                "-"
-            }
+            if (outputData.prdy_vrss_sign == "1" || outputData.prdy_vrss_sign == "2") "+"
+            else ""
         val info = "현재가 : ${outputData.stck_prpr}원 $sign${outputData.prdy_vrss},  $sign${outputData.prdy_ctrt}%"
 
         return SlackWebHookBody(

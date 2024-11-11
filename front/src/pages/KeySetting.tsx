@@ -25,11 +25,13 @@ const KeySetting = () => {
     const [keyValues, setKeyValues] = useState<KeyValues>(keyValuesInitialValue)
 
     const { isLoading, isError, data } = useQuery({
-        queryKey: ['getSettings', keyValues],
+        queryKey: ['getSettings'],
         queryFn: async (): Promise<ApiResponse<Setting>> => {
             return await fetch(apiUrl + 'setting/get').then((response) => response.json())
         },
         retry: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
     })
     // mutation -> db 저장된 키 변경하는 뮤테이션
     const updateAndGetAccessToken = useMutation({
@@ -45,7 +47,7 @@ const KeySetting = () => {
                     return res.json()
                 } else {
                     alert('error')
-                    throw new Error()
+                    throw new Error(res.statusText)
                 }
             })
         },
@@ -54,6 +56,9 @@ const KeySetting = () => {
                 alert(data.errorMessage)
                 throw new Error()
             }
+        },
+        onError: (e) => {
+            throw new Error(e.message)
         },
     })
 
