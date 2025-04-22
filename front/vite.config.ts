@@ -11,9 +11,9 @@ export default defineConfig({
             plugins: [tailwindcss(), autoprefixer()],
         },
     },
-    server: {
-        proxy: {
-            '/': 'http://localhost:8085',
-        },
-    },
+    // server: {
+    //     proxy: {
+    //         '/': 'http://localhost:8085',
+    //     },
+    // },
 })
